@@ -14,33 +14,17 @@ public class Calculator {
             try {
                 int choice = scanner.nextInt();
                 switch (choice) {
-                    case 1:
-                        performAddition(scanner);
-                        break;
-                    case 2:
-                        performSubtraction(scanner);
-                        break;
-                    case 3:
-                        performMultiplication(scanner);
-                        break;
-                    case 4:
-                        performDivision(scanner);
-                        break;
-                    case 5:
-                        performSquareRoot(scanner);
-                        break;
-                    case 6:
-                        performPower(scanner);
-                        break;
-                    case 7:
-                        performSine(scanner);
-                        break;
-                    case 8:
-                        performCosine(scanner);
-                        break;
-                    case 9:
-                        performTangent(scanner);
-                        break;
+                    case 1: performAddition(scanner); break;
+                    case 2: performSubtraction(scanner); break;
+                    case 3: performMultiplication(scanner); break;
+                    case 4: performDivision(scanner); break;
+                    case 5: performSquareRoot(scanner); break;
+                    case 6: performPower(scanner); break;
+                    case 7: performSine(scanner); break;
+                    case 8: performCosine(scanner); break;
+                    case 9: performTangent(scanner); break;
+                    case 10: performNaturalLogarithm(scanner); break;
+                    case 11: performLogarithmBase10(scanner); break;
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -50,7 +34,7 @@ public class Calculator {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number.");
-                scanner.next(); // Clear invalid input
+                scanner.next(); // clear invalid input
             }
         }
 
@@ -68,187 +52,190 @@ public class Calculator {
         System.out.println("7. Sine");
         System.out.println("8. Cosine");
         System.out.println("9. Tangent");
+        System.out.println("10. Natural Log (ln)");
+        System.out.println("11. Log Base 10");
         System.out.println("0. Exit");
     }
 
-    // --- Addition ---
+    // Addition
     public static double add(double num1, double num2) {
         return num1 + num2;
     }
-
     private static void performAddition(Scanner scanner) {
         try {
             System.out.print("Enter first number: ");
             double num1 = scanner.nextDouble();
             System.out.print("Enter second number: ");
             double num2 = scanner.nextDouble();
-            double result = add(num1, num2);
-            System.out.println("Result: " + result);
+            System.out.println("Result: " + add(num1, num2));
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter numeric values.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // --- Subtraction ---
+    // Subtraction
     public static double subtract(double num1, double num2) {
         return num1 - num2;
     }
-
     private static void performSubtraction(Scanner scanner) {
         try {
             System.out.print("Enter first number: ");
             double num1 = scanner.nextDouble();
             System.out.print("Enter second number: ");
             double num2 = scanner.nextDouble();
-            double result = subtract(num1, num2);
-            System.out.println("Result: " + result);
+            System.out.println("Result: " + subtract(num1, num2));
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter numeric values.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // --- Multiplication ---
+    // Multiplication
     public static double multiply(double num1, double num2) {
         return num1 * num2;
     }
-
     private static void performMultiplication(Scanner scanner) {
         try {
             System.out.print("Enter first number: ");
             double num1 = scanner.nextDouble();
             System.out.print("Enter second number: ");
             double num2 = scanner.nextDouble();
-            double result = multiply(num1, num2);
-            System.out.println("Result: " + result);
+            System.out.println("Result: " + multiply(num1, num2));
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter numeric values.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // --- Division ---
+    // Division
     public static double divide(double num1, double num2) {
-        if (num2 == 0) {
-            throw new ArithmeticException("Cannot divide by zero.");
-        }
+        if (num2 == 0) throw new ArithmeticException("Cannot divide by zero.");
         return num1 / num2;
     }
-
     private static void performDivision(Scanner scanner) {
         try {
             System.out.print("Enter numerator: ");
             double num1 = scanner.nextDouble();
             System.out.print("Enter denominator: ");
             double num2 = scanner.nextDouble();
-            double result = divide(num1, num2);
-            System.out.println("Result: " + result);
-        } catch (ArithmeticException e) {
+            System.out.println("Result: " + divide(num1, num2));
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter numeric values.");
             scanner.next();
         }
     }
 
-    // --- Square Root ---
+    // Square Root
     public static double calculateSquareRoot(double num) {
-        if (num < 0) {
-            throw new IllegalArgumentException("Cannot calculate square root of a negative number.");
-        }
+        if (num < 0) throw new IllegalArgumentException("Cannot calculate square root of a negative number.");
         return Math.sqrt(num);
     }
-
     private static void performSquareRoot(Scanner scanner) {
         try {
-            System.out.print("Enter number to find the square root: ");
+            System.out.print("Enter number: ");
             double num = scanner.nextDouble();
-            double result = calculateSquareRoot(num);
-            System.out.println("Result: " + result);
-        } catch (IllegalArgumentException e) {
+            System.out.println("Result: " + calculateSquareRoot(num));
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a numeric value.");
             scanner.next();
         }
     }
 
-    // --- Power ---
+    // Power
     public static double calculatePower(double base, double exponent) {
         return Math.pow(base, exponent);
     }
-
     private static void performPower(Scanner scanner) {
         try {
             System.out.print("Enter base: ");
             double base = scanner.nextDouble();
             System.out.print("Enter exponent: ");
             double exponent = scanner.nextDouble();
-            double result = calculatePower(base, exponent);
-            System.out.println("Result: " + result);
+            System.out.println("Result: " + calculatePower(base, exponent));
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter numeric values.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // --- Sine ---
+    // Sine
     public static double calculateSine(double degrees) {
-        double radians = Math.toRadians(degrees);
-        return Math.sin(radians);
+        return Math.sin(Math.toRadians(degrees));
     }
-
     private static void performSine(Scanner scanner) {
         try {
             System.out.print("Enter angle in degrees: ");
             double degrees = scanner.nextDouble();
-            double result = calculateSine(degrees);
-            System.out.println("Result (sin): " + result);
+            System.out.println("Result (sin): " + calculateSine(degrees));
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a numeric angle.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // --- Cosine ---
+    // Cosine
     public static double calculateCosine(double degrees) {
-        double radians = Math.toRadians(degrees);
-        return Math.cos(radians);
+        return Math.cos(Math.toRadians(degrees));
     }
-
     private static void performCosine(Scanner scanner) {
         try {
             System.out.print("Enter angle in degrees: ");
             double degrees = scanner.nextDouble();
-            double result = calculateCosine(degrees);
-            System.out.println("Result (cos): " + result);
+            System.out.println("Result (cos): " + calculateCosine(degrees));
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a numeric angle.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // --- Tangent ---
+    // Tangent
     public static double calculateTangent(double degrees) {
         double normalized = degrees % 180;
         if (normalized == 90 || normalized == -90) {
             throw new ArithmeticException("Tangent is undefined at " + degrees + " degrees.");
         }
-        double radians = Math.toRadians(degrees);
-        return Math.tan(radians);
+        return Math.tan(Math.toRadians(degrees));
     }
-
     private static void performTangent(Scanner scanner) {
         try {
             System.out.print("Enter angle in degrees: ");
             double degrees = scanner.nextDouble();
-            double result = calculateTangent(degrees);
-            System.out.println("Result (tan): " + result);
-        } catch (ArithmeticException e) {
+            System.out.println("Result (tan): " + calculateTangent(degrees));
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a numeric angle.");
+            scanner.next();
+        }
+    }
+
+    // Natural Log
+    public static double calculateNaturalLogarithm(double num) {
+        if (num <= 0) throw new IllegalArgumentException("ln is undefined for zero or negative numbers.");
+        return Math.log(num);
+    }
+    private static void performNaturalLogarithm(Scanner scanner) {
+        try {
+            System.out.print("Enter a positive number: ");
+            double num = scanner.nextDouble();
+            System.out.println("Result (ln): " + calculateNaturalLogarithm(num));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.next();
+        }
+    }
+
+    // Log Base 10
+    public static double calculateLogarithmBase10(double num) {
+        if (num <= 0) throw new IllegalArgumentException("log₁₀ is undefined for zero or negative numbers.");
+        return Math.log10(num);
+    }
+    private static void performLogarithmBase10(Scanner scanner) {
+        try {
+            System.out.print("Enter a positive number: ");
+            double num = scanner.nextDouble();
+            System.out.println("Result (log₁₀): " + calculateLogarithmBase10(num));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
             scanner.next();
         }
     }
