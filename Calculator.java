@@ -25,6 +25,8 @@ public class Calculator {
                     case 9: performTangent(scanner); break;
                     case 10: performNaturalLogarithm(scanner); break;
                     case 11: performLogarithmBase10(scanner); break;
+                    case 12: performRoundingFunctions(scanner); break;
+
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -54,6 +56,7 @@ public class Calculator {
         System.out.println("9. Tangent");
         System.out.println("10. Natural Log (ln)");
         System.out.println("11. Log Base 10");
+        System.out.println("12. Rounding (round / ceil / floor)");
         System.out.println("0. Exit");
     }
 
@@ -239,4 +242,48 @@ public class Calculator {
             scanner.next();
         }
     }
+    // --- Rounding Functions ---
+    public static long roundNumber(double num) {
+        return Math.round(num);
+    }
+
+    public static double ceilingNumber(double num) {
+        return Math.ceil(num);
+    }
+
+    public static double floorNumber(double num) {
+        return Math.floor(num);
+    }
+
+    private static void performRoundingFunctions(Scanner scanner) {
+        try {
+            System.out.print("Enter a number to round: ");
+            double num = scanner.nextDouble();
+
+            System.out.println("Choose rounding type:");
+            System.out.println("1. Round to nearest");
+            System.out.println("2. Round up (ceil)");
+            System.out.println("3. Round down (floor)");
+            System.out.print("Enter choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Rounded (nearest): " + roundNumber(num));
+                    break;
+                case 2:
+                    System.out.println("Rounded (ceil): " + ceilingNumber(num));
+                    break;
+                case 3:
+                    System.out.println("Rounded (floor): " + floorNumber(num));
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter numeric values.");
+            scanner.next();
+        }
+    }
+
 }
