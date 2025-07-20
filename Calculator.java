@@ -26,7 +26,7 @@ public class Calculator {
                     case 10: performNaturalLogarithm(scanner); break;
                     case 11: performLogarithmBase10(scanner); break;
                     case 12: performRoundingFunctions(scanner); break;
-
+                    case 13: performMinMax(scanner); break;
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -57,83 +57,77 @@ public class Calculator {
         System.out.println("10. Natural Log (ln)");
         System.out.println("11. Log Base 10");
         System.out.println("12. Rounding (round / ceil / floor)");
+        System.out.println("13. Min and Max");
         System.out.println("0. Exit");
     }
 
-    // Addition
-    public static double add(double num1, double num2) {
-        return num1 + num2;
+    // Basic operations (add, subtract, multiply, divide)
+    public static double add(double a, double b) { return a + b; }
+    public static double subtract(double a, double b) { return a - b; }
+    public static double multiply(double a, double b) { return a * b; }
+    public static double divide(double a, double b) {
+        if (b == 0) throw new ArithmeticException("Cannot divide by zero.");
+        return a / b;
     }
+
     private static void performAddition(Scanner scanner) {
         try {
             System.out.print("Enter first number: ");
-            double num1 = scanner.nextDouble();
+            double a = scanner.nextDouble();
             System.out.print("Enter second number: ");
-            double num2 = scanner.nextDouble();
-            System.out.println("Result: " + add(num1, num2));
+            double b = scanner.nextDouble();
+            System.out.println("Result: " + add(a, b));
         } catch (InputMismatchException e) {
             System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // Subtraction
-    public static double subtract(double num1, double num2) {
-        return num1 - num2;
-    }
     private static void performSubtraction(Scanner scanner) {
         try {
             System.out.print("Enter first number: ");
-            double num1 = scanner.nextDouble();
+            double a = scanner.nextDouble();
             System.out.print("Enter second number: ");
-            double num2 = scanner.nextDouble();
-            System.out.println("Result: " + subtract(num1, num2));
+            double b = scanner.nextDouble();
+            System.out.println("Result: " + subtract(a, b));
         } catch (InputMismatchException e) {
             System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // Multiplication
-    public static double multiply(double num1, double num2) {
-        return num1 * num2;
-    }
     private static void performMultiplication(Scanner scanner) {
         try {
             System.out.print("Enter first number: ");
-            double num1 = scanner.nextDouble();
+            double a = scanner.nextDouble();
             System.out.print("Enter second number: ");
-            double num2 = scanner.nextDouble();
-            System.out.println("Result: " + multiply(num1, num2));
+            double b = scanner.nextDouble();
+            System.out.println("Result: " + multiply(a, b));
         } catch (InputMismatchException e) {
             System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
-    // Division
-    public static double divide(double num1, double num2) {
-        if (num2 == 0) throw new ArithmeticException("Cannot divide by zero.");
-        return num1 / num2;
-    }
     private static void performDivision(Scanner scanner) {
         try {
             System.out.print("Enter numerator: ");
-            double num1 = scanner.nextDouble();
+            double a = scanner.nextDouble();
             System.out.print("Enter denominator: ");
-            double num2 = scanner.nextDouble();
-            System.out.println("Result: " + divide(num1, num2));
+            double b = scanner.nextDouble();
+            System.out.println("Result: " + divide(a, b));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             scanner.next();
         }
     }
 
-    // Square Root
+    // Scientific operations
     public static double calculateSquareRoot(double num) {
         if (num < 0) throw new IllegalArgumentException("Cannot calculate square root of a negative number.");
         return Math.sqrt(num);
     }
+
     private static void performSquareRoot(Scanner scanner) {
         try {
             System.out.print("Enter number: ");
@@ -145,10 +139,10 @@ public class Calculator {
         }
     }
 
-    // Power
     public static double calculatePower(double base, double exponent) {
         return Math.pow(base, exponent);
     }
+
     private static void performPower(Scanner scanner) {
         try {
             System.out.print("Enter base: ");
@@ -162,10 +156,10 @@ public class Calculator {
         }
     }
 
-    // Sine
     public static double calculateSine(double degrees) {
         return Math.sin(Math.toRadians(degrees));
     }
+
     private static void performSine(Scanner scanner) {
         try {
             System.out.print("Enter angle in degrees: ");
@@ -177,10 +171,10 @@ public class Calculator {
         }
     }
 
-    // Cosine
     public static double calculateCosine(double degrees) {
         return Math.cos(Math.toRadians(degrees));
     }
+
     private static void performCosine(Scanner scanner) {
         try {
             System.out.print("Enter angle in degrees: ");
@@ -192,7 +186,6 @@ public class Calculator {
         }
     }
 
-    // Tangent
     public static double calculateTangent(double degrees) {
         double normalized = degrees % 180;
         if (normalized == 90 || normalized == -90) {
@@ -200,6 +193,7 @@ public class Calculator {
         }
         return Math.tan(Math.toRadians(degrees));
     }
+
     private static void performTangent(Scanner scanner) {
         try {
             System.out.print("Enter angle in degrees: ");
@@ -211,11 +205,11 @@ public class Calculator {
         }
     }
 
-    // Natural Log
     public static double calculateNaturalLogarithm(double num) {
         if (num <= 0) throw new IllegalArgumentException("ln is undefined for zero or negative numbers.");
         return Math.log(num);
     }
+
     private static void performNaturalLogarithm(Scanner scanner) {
         try {
             System.out.print("Enter a positive number: ");
@@ -227,11 +221,11 @@ public class Calculator {
         }
     }
 
-    // Log Base 10
     public static double calculateLogarithmBase10(double num) {
         if (num <= 0) throw new IllegalArgumentException("log₁₀ is undefined for zero or negative numbers.");
         return Math.log10(num);
     }
+
     private static void performLogarithmBase10(Scanner scanner) {
         try {
             System.out.print("Enter a positive number: ");
@@ -242,18 +236,11 @@ public class Calculator {
             scanner.next();
         }
     }
-    // --- Rounding Functions ---
-    public static long roundNumber(double num) {
-        return Math.round(num);
-    }
 
-    public static double ceilingNumber(double num) {
-        return Math.ceil(num);
-    }
-
-    public static double floorNumber(double num) {
-        return Math.floor(num);
-    }
+    // --- Rounding ---
+    public static long roundNumber(double num) { return Math.round(num); }
+    public static double ceilingNumber(double num) { return Math.ceil(num); }
+    public static double floorNumber(double num) { return Math.floor(num); }
 
     private static void performRoundingFunctions(Scanner scanner) {
         try {
@@ -268,22 +255,33 @@ public class Calculator {
             int choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
-                    System.out.println("Rounded (nearest): " + roundNumber(num));
-                    break;
-                case 2:
-                    System.out.println("Rounded (ceil): " + ceilingNumber(num));
-                    break;
-                case 3:
-                    System.out.println("Rounded (floor): " + floorNumber(num));
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
+                case 1: System.out.println("Rounded (nearest): " + roundNumber(num)); break;
+                case 2: System.out.println("Rounded (ceil): " + ceilingNumber(num)); break;
+                case 3: System.out.println("Rounded (floor): " + floorNumber(num)); break;
+                default: System.out.println("Invalid choice.");
             }
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter numeric values.");
+            System.out.println("Invalid input.");
             scanner.next();
         }
     }
 
+    // --- Min and Max ---
+    public static double findMin(double a, double b) { return Math.min(a, b); }
+    public static double findMax(double a, double b) { return Math.max(a, b); }
+
+    private static void performMinMax(Scanner scanner) {
+        try {
+            System.out.print("Enter first number: ");
+            double a = scanner.nextDouble();
+            System.out.print("Enter second number: ");
+            double b = scanner.nextDouble();
+
+            System.out.println("Minimum: " + findMin(a, b));
+            System.out.println("Maximum: " + findMax(a, b));
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input.");
+            scanner.next();
+        }
+    }
 }
