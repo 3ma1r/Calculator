@@ -38,6 +38,9 @@ public class Calculator {
                     case 8:
                         performCosine(scanner);
                         break;
+                    case 9:
+                        performTangent(scanner);
+                        break;
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -64,6 +67,7 @@ public class Calculator {
         System.out.println("6. Power");
         System.out.println("7. Sine");
         System.out.println("8. Cosine");
+        System.out.println("9. Tangent");
         System.out.println("0. Exit");
     }
 
@@ -219,6 +223,30 @@ public class Calculator {
             double degrees = scanner.nextDouble();
             double result = calculateCosine(degrees);
             System.out.println("Result (cos): " + result);
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a numeric angle.");
+            scanner.next();
+        }
+    }
+
+    // --- Tangent ---
+    public static double calculateTangent(double degrees) {
+        double normalized = degrees % 180;
+        if (normalized == 90 || normalized == -90) {
+            throw new ArithmeticException("Tangent is undefined at " + degrees + " degrees.");
+        }
+        double radians = Math.toRadians(degrees);
+        return Math.tan(radians);
+    }
+
+    private static void performTangent(Scanner scanner) {
+        try {
+            System.out.print("Enter angle in degrees: ");
+            double degrees = scanner.nextDouble();
+            double result = calculateTangent(degrees);
+            System.out.println("Result (tan): " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a numeric angle.");
             scanner.next();
