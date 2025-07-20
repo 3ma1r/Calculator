@@ -23,6 +23,9 @@ public class Calculator {
                     case 3:
                         performMultiplication(scanner);
                         break;
+                    case 4:
+                        performDivision(scanner);
+                        break;
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -44,6 +47,7 @@ public class Calculator {
         System.out.println("1. Add");
         System.out.println("2. Subtract");
         System.out.println("3. Multiply");
+        System.out.println("4. Divide");
         System.out.println("0. Exit");
     }
 
@@ -98,6 +102,32 @@ public class Calculator {
             double num2 = scanner.nextDouble();
             double result = multiply(num1, num2);
             System.out.println("Result: " + result);
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter numeric values.");
+            scanner.next();
+        }
+    }
+
+    // --- Division ---
+    public static double divide(double num1, double num2) {
+        if (num2 == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+        return num1 / num2;
+    }
+
+    private static void performDivision(Scanner scanner) {
+        try {
+            System.out.print("Enter numerator: ");
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter denominator: ");
+            double num2 = scanner.nextDouble();
+
+            double result = divide(num1, num2);
+            System.out.println("Result: " + result);
+
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter numeric values.");
             scanner.next();
