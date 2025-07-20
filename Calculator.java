@@ -26,6 +26,9 @@ public class Calculator {
                     case 4:
                         performDivision(scanner);
                         break;
+                    case 5:
+                        performSquareRoot(scanner);
+                        break;
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -48,6 +51,7 @@ public class Calculator {
         System.out.println("2. Subtract");
         System.out.println("3. Multiply");
         System.out.println("4. Divide");
+        System.out.println("5. Square Root");
         System.out.println("0. Exit");
     }
 
@@ -130,6 +134,28 @@ public class Calculator {
             System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter numeric values.");
+            scanner.next();
+        }
+    }
+
+    // --- Square Root ---
+    public static double calculateSquareRoot(double num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("Cannot calculate square root of a negative number.");
+        }
+        return Math.sqrt(num);
+    }
+
+    private static void performSquareRoot(Scanner scanner) {
+        try {
+            System.out.print("Enter number to find the square root: ");
+            double num = scanner.nextDouble();
+            double result = calculateSquareRoot(num);
+            System.out.println("Result: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a numeric value.");
             scanner.next();
         }
     }
