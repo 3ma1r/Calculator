@@ -35,6 +35,9 @@ public class Calculator {
                     case 7:
                         performSine(scanner);
                         break;
+                    case 8:
+                        performCosine(scanner);
+                        break;
                     case 0:
                         running = false;
                         System.out.println("Exiting calculator.");
@@ -60,6 +63,7 @@ public class Calculator {
         System.out.println("5. Square Root");
         System.out.println("6. Power");
         System.out.println("7. Sine");
+        System.out.println("8. Cosine");
         System.out.println("0. Exit");
     }
 
@@ -134,10 +138,8 @@ public class Calculator {
             double num1 = scanner.nextDouble();
             System.out.print("Enter denominator: ");
             double num2 = scanner.nextDouble();
-
             double result = divide(num1, num2);
             System.out.println("Result: " + result);
-
         } catch (ArithmeticException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
@@ -199,6 +201,24 @@ public class Calculator {
             double degrees = scanner.nextDouble();
             double result = calculateSine(degrees);
             System.out.println("Result (sin): " + result);
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a numeric angle.");
+            scanner.next();
+        }
+    }
+
+    // --- Cosine ---
+    public static double calculateCosine(double degrees) {
+        double radians = Math.toRadians(degrees);
+        return Math.cos(radians);
+    }
+
+    private static void performCosine(Scanner scanner) {
+        try {
+            System.out.print("Enter angle in degrees: ");
+            double degrees = scanner.nextDouble();
+            double result = calculateCosine(degrees);
+            System.out.println("Result (cos): " + result);
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a numeric angle.");
             scanner.next();
